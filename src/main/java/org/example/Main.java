@@ -76,6 +76,16 @@ public class Main {
         return ranking[0].clave;
     }
 
+    public Tecnico tecnicoMasRapido(Tecnico[] l){
+        Tecnico res = l[0];
+        for(Tecnico tecnico : l) {
+            if (sumHoras(tecnico.getEstimaciones()) < sumHoras(res.getEstimaciones())) {
+                res  = tecnico;
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
 
         ServicioRepositorio repoServicio = new ServicioRepositorio();
@@ -297,5 +307,13 @@ public class Main {
             res = res + l[i];
         }
         return res;
+    }
+
+    private int sumHoras(List<Estimacion> l){
+        int res = 0;
+        for (int i=0;i<l.size();i++){
+            res = res + l.get(i).getCantidadHorasEstimadas();
+        }
+        return res/l.size;
     }
 }
