@@ -25,13 +25,8 @@ public class Main {
         }
         return res;
     }
-    public Tecnico MasIncidentesResueltosEspecialidad(Tecnico[] l, int n){
+    public Tecnico MasIncidentesResueltosEspecialidad(Tecnico[] l, int n){ // temporal
         Tecnico res = l[0];
-        for (int i=1;i<=l.length;i++) {
-            if (sum(res.IncidentesResueltos,n) == sum (l[i].IncidentesResueltos,n)){
-                res = l[i];
-            }
-        }
         return res;
     }
 

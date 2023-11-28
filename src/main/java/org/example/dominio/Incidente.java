@@ -21,10 +21,6 @@ public class Incidente implements Serializable {
     private String fechaCreacion;
     private String fechaResolucion;
 
-
-    public Incidente() {
-    }
-
     public Incidente(String nombre, List<Problema> problemas, Servicio servicioReportado, Tecnico tecnicoAsignado, EstadoIncidente estadoIncidente, String fechaCreacion, String fechaResolucion) {
         this.nombre = nombre;
         this.problemas = problemas;
