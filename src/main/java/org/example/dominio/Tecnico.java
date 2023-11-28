@@ -14,19 +14,18 @@ public class Tecnico implements Serializable {
     @OneToMany(mappedBy = "idEspecialidades")
     private List<Especialidad> especialidades = new ArrayList<>();
     private boolean disponible;
-    private String notificaciones;
+    private List<Notificacion> notificaciones;
+
+    public int[] IncidentesResueltos;
     @OneToMany
     private List<Estimacion> estimaciones = new ArrayList<>();
 
-    public Tecnico() {
-    }
-
-    public Tecnico(String nombre, List<Especialidad> especialidades, boolean disponible, String notificaciones, List<Estimacion> estimaciones) {
+    public Tecnico(String nombre, List<Especialidad> especialidades, boolean disponible, List<Estimacion> estimaciones) {
         this.nombre = nombre;
         this.especialidades = especialidades;
         this.disponible = disponible;
-        this.notificaciones = notificaciones;
         this.estimaciones = estimaciones;
+        this.IncidentesResueltos = new int[7];
     }
 
     public Long getIdTecnico() {
@@ -61,14 +60,11 @@ public class Tecnico implements Serializable {
         this.disponible = disponible;
     }
 
-    public String getNotificaciones() {
+    public List<Notificacion> getNotificaciones() {
         return notificaciones;
     }
 
-    public void setNotificaciones(String notificaciones) {
-        this.notificaciones = notificaciones;
-    }
-
+    public void Notificar(Notificacion notificacion){this.notificaciones.add(notificacion);}
     public List<Estimacion> getEstimaciones() {
         return estimaciones;
     }
