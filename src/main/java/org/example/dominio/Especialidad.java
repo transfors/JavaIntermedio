@@ -11,9 +11,6 @@ public class Especialidad implements Serializable {
     private String nombreEspecialidad;
     private String descripcionEspecialidad;
 
-    public Especialidad() {
-    }
-
     public Especialidad(String nombreEspecialidad, String descripcionEspecialidad) {
         this.nombreEspecialidad = nombreEspecialidad;
         this.descripcionEspecialidad = descripcionEspecialidad;

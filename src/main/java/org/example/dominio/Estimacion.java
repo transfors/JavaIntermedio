@@ -12,9 +12,6 @@ public class Estimacion implements Serializable {
     @OneToOne
     private TipoProblema tipoProblema;
 
-    public Estimacion() {
-    }
-
     public Estimacion(Integer cantidadHorasEstimadas, TipoProblema tipoProblema) {
         this.cantidadHorasEstimadas = cantidadHorasEstimadas;
         this.tipoProblema = tipoProblema;

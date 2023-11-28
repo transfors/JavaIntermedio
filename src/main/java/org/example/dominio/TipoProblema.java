@@ -17,9 +17,6 @@ public class TipoProblema implements Serializable {
     @OneToMany(mappedBy = "idEspecialidades")
     private List<Especialidad> especialidades = new ArrayList<>();
 
-    public TipoProblema() {
-    }
-
     public TipoProblema(String nombre, String descripcionProblema, Integer maxHsResolucion, List<Especialidad> especialidades) {
         this.nombre = nombre;
         this.descripcionProblema = descripcionProblema;

@@ -45,9 +45,6 @@ public class Main {
         }
         return ranking[0].clave;
     }
-
-
-
     public Tecnico MasIncidentesResueltosEspecialidad(Tecnico[] l, Incidente[] Inc, int n, Problema problema) { // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
         Tupla[] ranking = new Tupla[l.length];
         Tecnico res = l[0];
