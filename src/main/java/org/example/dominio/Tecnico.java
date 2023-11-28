@@ -2,7 +2,8 @@ package org.example.dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Tecnico implements Serializable {
@@ -10,20 +11,22 @@ public class Tecnico implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTecnico;
     private String nombre;
-    private String notificacion;
-    @ManyToMany
+    @OneToMany(mappedBy = "idEspecialidades")
     private List<Especialidad> especialidades = new ArrayList<>();
-    @ManyToMany
-//    @JoinColumn(name = "id", referencedColumnName = "idEstimacion")
-    private List<Estimacion> cantHorasEstimadas = new ArrayList<>();
+    private boolean disponible;
+    private String notificaciones;
+    @OneToMany
+    private List<Estimacion> estimaciones = new ArrayList<>();
 
     public Tecnico() {
     }
-    public Tecnico(String nombre, String notificacion) {
+
+    public Tecnico(String nombre, List<Especialidad> especialidades, boolean disponible, String notificaciones, List<Estimacion> estimaciones) {
         this.nombre = nombre;
-        this.notificacion = notificacion;
-    }
-    public Tecnico(String gerardo, String notificación, Especialidad especialidad1, Estimacion estimacion1) {
+        this.especialidades = especialidades;
+        this.disponible = disponible;
+        this.notificaciones = notificaciones;
+        this.estimaciones = estimaciones;
     }
 
     public Long getIdTecnico() {
@@ -34,14 +37,6 @@ public class Tecnico implements Serializable {
         this.idTecnico = idTecnico;
     }
 
-    public List<Especialidad> getEspecialidades() {
-        return especialidades;
-    }
-
-    public void setEspecialidades(List<Especialidad> especialidades) {
-        this.especialidades = especialidades;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -50,30 +45,42 @@ public class Tecnico implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getNotificacion() {
-        return notificacion;
+    public List<Especialidad> getEspecialidades() {
+        return especialidades;
     }
 
-    public void setNotificacion(String notificacion) {
-        this.notificacion = notificacion;
+    public void setEspecialidades(List<Especialidad> especialidades) {
+        this.especialidades = especialidades;
     }
 
-    public List<Estimacion> getCantHorasEstimadas() {
-        return cantHorasEstimadas;
+    public boolean isDisponible() {
+        return disponible;
     }
 
-    public void setCantHorasEstimadas(List<Estimacion> cantHorasEstimadas) {
-        this.cantHorasEstimadas = cantHorasEstimadas;
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
-    // METODO PARA AGREGAR LAS ESPECIALIDADES
-    public void agregarEspecialidad(Especialidad especialidad) {
-        this.especialidades.add(especialidad);
+    public String getNotificaciones() {
+        return notificaciones;
     }
 
-    // METODO PARA AGREGAR CANTIDAD DE HORAS ESTIMADAS DE RESOLUCION
-    public void agregarHorasEstimadasResolucion(Estimacion estimacion) {
-        this.cantHorasEstimadas.add(estimacion);
+    public void setNotificaciones(String notificaciones) {
+        this.notificaciones = notificaciones;
+    }
+
+    public List<Estimacion> getEstimaciones() {
+        return estimaciones;
+    }
+
+    public void setEstimaciones(List<Estimacion> estimaciones) {
+        this.estimaciones = estimaciones;
+    }
+
+    public void agregarEspecialidad(Especialidad especialidad3) {
+    }
+
+    public void agregarHorasEstimadasResolucion(Estimacion estimacion1) {
     }
 
     @Override
@@ -81,9 +88,13 @@ public class Tecnico implements Serializable {
         return "Tecnico {" +
                 "idTecnico = " + idTecnico +
                 ", nombre = '" + nombre + '\'' +
-                ", notificacion = '" + notificacion + '\'' +
                 ", especialidades = " + especialidades +
-                ", cantHorasEstimadas = " + cantHorasEstimadas +
+                ", disponible = " + disponible +
+                ", notificaciones = '" + notificaciones + '\'' +
+                ", estimaciones = " + estimaciones +
                 '}';
     }
+
+
+
 }

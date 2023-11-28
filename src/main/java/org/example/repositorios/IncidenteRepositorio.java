@@ -1,5 +1,6 @@
 package org.example.repositorios;
 
+import org.example.dominio.Cliente;
 import org.example.dominio.Incidente;
 import org.example.utilidades.HibernateUtil;
 import org.hibernate.Session;
@@ -31,18 +32,9 @@ public class IncidenteRepositorio {
         return session.createQuery("from Incidente", Incidente.class).list();
     }
 
-    public Incidente getFechaPosibleResolucion(String fechaResolucion) {
-        List<Incidente> resultados = session.createQuery("from Incidente where fechaPosibleResolucion = :fechaResolucion", Incidente.class)
-                .setParameter("fechaResolucion", fechaResolucion)
-                .list();
-        if (!resultados.isEmpty()) {
-            return resultados.get(0);
-        } else {
-            return null;
-        }
+    public Incidente getIncidentesPorNombre(String nombre){
+        return session.createQuery("from Incidente where nombre = :nombre", Incidente.class).setParameter("nombre", nombre).list().get(0);
     }
-    public Incidente getIncidenteIngresado(boolean incIngresado) {
-        return session.createQuery("from Incidente where true = :incIngresado", Incidente.class).setParameter("incIngresado", incIngresado).list().get(0);
-    }
+
 
 }

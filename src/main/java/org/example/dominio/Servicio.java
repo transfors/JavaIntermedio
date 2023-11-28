@@ -11,17 +11,19 @@ public class Servicio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idServicio;
     private String nombreServicio;
-    @OneToMany
-//    @JoinColumn(name = "idIncidente", referencedColumnName = "idProblema")
-    private List<Problema> tipoProblema = new ArrayList<>();
+    private String descripcionServicio;
+//    @OneToMany
+////    @JoinColumn(name = "idIncidente", referencedColumnName = "idProblema")
+//    private List<Problema> tipoProblema = new ArrayList<>();
 
     public Servicio() {
     }
 
-    public Servicio(String nombreServicio) {
-        this.idServicio = idServicio;
+    public Servicio(String nombreServicio, String descripcionServicio) {
         this.nombreServicio = nombreServicio;
+        this.descripcionServicio = descripcionServicio;
     }
+
     public Long getIdServicio() {
         return idServicio;
     }
@@ -38,25 +40,29 @@ public class Servicio implements Serializable {
         this.nombreServicio = nombreServicio;
     }
 
-    public List<Problema> getTipoProblema() {
-        return tipoProblema;
+    public String getDescripcionServicio() {
+        return descripcionServicio;
     }
 
-    public void setTipoProblema(List<Problema> tipoProblema) {
-        this.tipoProblema = tipoProblema;
+    public void setDescripcionServicio(String descripcionServicio) {
+        this.descripcionServicio = descripcionServicio;
     }
 
-    // METODO PARA AGREGAR LOS TIPOS DE PROBLEMAS
-    public void agregarListaProblemas(Problema problema) {
-        this.tipoProblema.add(problema);
-    }
+//    // METODO PARA AGREGAR LOS TIPOS DE PROBLEMAS
+//    public void agregarListaProblemas(Problema problema) {
+//        this.tipoProblema.add(problema);
+//    }
+
 
     @Override
     public String toString() {
         return "Servicio {" +
                 "idServicio = " + idServicio +
                 ", nombreServicio = '" + nombreServicio + '\'' +
-                ", tipoProblema = " + tipoProblema +
+                ", descripcionServicio = '" + descripcionServicio + '\'' +
                 '}';
+    }
+
+    public void agregarListaProblemas(TipoProblema tipoProblema1) {
     }
 }

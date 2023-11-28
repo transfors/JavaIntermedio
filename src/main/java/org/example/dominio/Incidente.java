@@ -2,36 +2,37 @@ package org.example.dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Incidente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idIncidente;
+    private String nombre;
+    @OneToMany
+    private List<Problema> problemas;
     @ManyToOne
-    private Cliente cliente;
-    private String servicio;
-    private String descripcion;
-    private String tipoProblema;
+    private Servicio servicioReportado;
     @ManyToOne
     private Tecnico tecnicoAsignado;
-    private String fechaPosibleResolucion;
-    private boolean incidenteIngresado = true;
+    private EstadoIncidente estadoIncidente;
+    private String fechaCreacion;
+    private String fechaResolucion;
+
 
     public Incidente() {
     }
 
-    public Incidente(Cliente cliente, String servicio, String descripcion, String tipoProblema, Tecnico tecnicoAsignado, String fechaPosibleResolucion, boolean incidenteIngresado) {
-        this.cliente = cliente;
-        this.servicio = servicio;
-        this.descripcion = descripcion;
-        this.tipoProblema = tipoProblema;
+    public Incidente(String nombre, List<Problema> problemas, Servicio servicioReportado, Tecnico tecnicoAsignado, EstadoIncidente estadoIncidente, String fechaCreacion, String fechaResolucion) {
+        this.nombre = nombre;
+        this.problemas = problemas;
+        this.servicioReportado = servicioReportado;
         this.tecnicoAsignado = tecnicoAsignado;
-        this.fechaPosibleResolucion = fechaPosibleResolucion;
-        this.incidenteIngresado = incidenteIngresado;
-    }
-
-    public static void agregarIncidente(Incidente incidente1) {
+        this.estadoIncidente = estadoIncidente;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaResolucion = fechaResolucion;
     }
 
     public Long getIdIncidente() {
@@ -42,36 +43,28 @@ public class Incidente implements Serializable {
         this.idIncidente = idIncidente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setServicio(String servicio) {
-        this.servicio = servicio;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public List<Problema> getProblemas() {
+        return problemas;
     }
 
-    public void setTipoProblema(String tipoProblema) {
-        this.tipoProblema = tipoProblema;
+    public void setProblemas(List<Problema> problemas) {
+        this.problemas = problemas;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Servicio getServicioReportado() {
+        return servicioReportado;
     }
 
-    public String getServicio() {
-        return servicio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public String getTipoProblema() {
-        return tipoProblema;
+    public void setServicioReportado(Servicio servicioReportado) {
+        this.servicioReportado = servicioReportado;
     }
 
     public Tecnico getTecnicoAsignado() {
@@ -82,33 +75,48 @@ public class Incidente implements Serializable {
         this.tecnicoAsignado = tecnicoAsignado;
     }
 
-    public String getFechaPosibleResolucion() {
-        return fechaPosibleResolucion;
+    public EstadoIncidente getEstadoIncidente() {
+        return estadoIncidente;
     }
 
-    public void setFechaPosibleResolucion(String fechaResolucion) {
-        this.fechaPosibleResolucion = fechaResolucion;
+    public void setEstadoIncidente(EstadoIncidente estadoIncidente) {
+        this.estadoIncidente = estadoIncidente;
     }
 
-    public boolean isIncidenteIngresado() {
-        return incidenteIngresado;
+    public String getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setIncidenteIngresado(boolean incidenteIngresado) {
-        this.incidenteIngresado = incidenteIngresado;
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
+
+    public String getFechaResolucion() {
+        return fechaResolucion;
+    }
+
+    public void setFechaResolucion(String fechaResolucion) {
+        this.fechaResolucion = fechaResolucion;
+    }
+
+    public static void agregarIncidente(Incidente incidente1) {
+    }
+
 
     @Override
     public String toString() {
-        return "Incidente{" +
-                "idIncidente=" + idIncidente +
-                ", cliente=" + cliente +
-                ", servicio='" + servicio + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", tipoProblema='" + tipoProblema + '\'' +
-                ", tecnicoAsignado=" + tecnicoAsignado +
-                ", fechaPosibleResolucion='" + fechaPosibleResolucion + '\'' +
-                ", incidenteIngresado=" + incidenteIngresado +
+        return "Incidente {" +
+                "idIncidente = " + idIncidente +
+                ", nombre = '" + nombre + '\'' +
+                ", problemas = " + problemas +
+                ", servicioReportado = " + servicioReportado +
+                ", tecnicoAsignado = " + tecnicoAsignado +
+                ", estadoIncidente = " + estadoIncidente +
+                ", fechaCreacion = " + fechaCreacion +
+                ", fechaResolucion = " + fechaResolucion +
                 '}';
     }
+
+
+
 }
