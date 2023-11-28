@@ -8,7 +8,7 @@ public class Miembro {
     }
     public metodoContacto metodoContacto;
 
-    public void notificar() {
+    public void notificar(Notificacion Notificacion, Miembro Miembro) {
         if (metodoContacto == metodoContacto.Email) {
          // enviar mail
         }
