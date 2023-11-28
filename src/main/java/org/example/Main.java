@@ -314,6 +314,6 @@ public class Main {
         for (int i=0;i<l.size();i++){
             res = res + l.get(i).getCantidadHorasEstimadas();
         }
-        return res/l.size;
+        return res/l.size();
     }
 }
