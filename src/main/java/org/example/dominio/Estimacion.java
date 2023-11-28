@@ -14,9 +14,6 @@ public class Estimacion implements Serializable {
     private Integer cantidadHorasEstimadas = 0;
     private String tipoProblema;
 
-    public Estimacion() {
-    }
-
     public Estimacion(Integer cantidadHorasEstimadas, String tipoProblema) {
         this.cantidadHorasEstimadas = cantidadHorasEstimadas;
         this.tipoProblema = tipoProblema;

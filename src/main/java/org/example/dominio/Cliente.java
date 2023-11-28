@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Cliente implements Serializable {
+public class Cliente extends Miembro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCliente;
@@ -15,9 +15,6 @@ public class Cliente implements Serializable {
     private String mail;
     @ManyToMany
     private List<Servicio> servicioContratados = new ArrayList<>();
-
-    public Cliente() {
-    }
 
     public Cliente(String razonSocial, String cuit) {
         this.razonSocial = razonSocial;

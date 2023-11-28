@@ -18,9 +18,6 @@ public class Incidente implements Serializable {
     private String fechaPosibleResolucion;
     private boolean incidenteIngresado = true;
 
-    public Incidente() {
-    }
-
     public Incidente(Cliente cliente, String servicio, String descripcion, String tipoProblema, Tecnico tecnicoAsignado, String fechaPosibleResolucion, boolean incidenteIngresado) {
         this.cliente = cliente;
         this.servicio = servicio;

@@ -12,6 +12,27 @@ import org.example.repositorios.*;
 //        TOMAS TORANZOS
 
 public class Main {
+
+    public Tecnico MasIncidentesResueltos(Tecnico[] l, int n){ // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
+        Tecnico res = l[0];
+        for (int i=1;i<=l.length;i++) {
+            if (sum(res.IncidentesResueltos,n) == sum (l[i].IncidentesResueltos,n)){
+                res = l[i];
+            }
+        }
+    return res;
+    }
+    public Tecnico MasIncidentesResueltosEspecialidad(Tecnico[] l, int n){
+        Tecnico res = l[0];
+        for (int i=1;i<=l.length;i++) {
+            if (sum(res.IncidentesResueltos,n) == sum (l[i].IncidentesResueltos,n)){
+                res = l[i];
+            }
+        }
+        return res;
+    }
+
+
     public static void main(String[] args) {
 
         ClienteRepositorio repoCliente = new ClienteRepositorio();
@@ -67,128 +88,142 @@ public class Main {
         Estimacion estimacionCantHsEst1 = repoEstimaciones.getCantHsEst(8);
         System.out.println(estimacionCantHsEst1);
 
-//
-//        // TIPOS DE PROBLEMA
-//        ProblemaRepositorio repoTipoProblema = new ProblemaRepositorio();
-//
-//        Problema tipoProblema1 = new Problema("Resolución de Incidentes Críticos", 5);
-//        Problema tipoProblema2 = new Problema("Mantenimiento preventivo", 3);
-//        Problema tipoProblema3 = new Problema("Soporte Técnico", 4);
-//
-//        repoTipoProblema.guardarProblema(tipoProblema1);
-//        repoTipoProblema.guardarProblema(tipoProblema2);
-//        repoTipoProblema.guardarProblema(tipoProblema3);
-//
-//
-//        // SERVICIOS
-//        ServicioRepositorio repoServicio = new ServicioRepositorio();
-//
-//        Servicio servicio1 = new Servicio("Mantenimiento de SAP");
-//        Servicio servicio2 = new Servicio("Soporte para Aplicaciones Tango");
-//        Servicio servicio3 = new Servicio("Asistencia en Sistemas Operativos Windows");
-//
-//        repoServicio.guardarServicio(servicio1);
-//        repoServicio.guardarServicio(servicio2);
-//        repoServicio.guardarServicio(servicio3);
-//
-//
-//        // ESPECIALIDADES
-//        EspecialidadesRepositorio repoEspecialidades = new EspecialidadesRepositorio();
-//
-//        Especialidad especialidad1 = new Especialidad("Especialista en SAP","Profesional con amplia experiencia");
-//        Especialidad especialidad2 = new Especialidad("Técnico en Tango","Especializado en configuración de aplicaciones Tango");
-//        Especialidad especialidad3 = new Especialidad("Experto en Windows","Experiencia en Sistemas Operativos Windows");
-//
-//        repoEspecialidades.guardarEspecialidades(especialidad1);
-//        repoEspecialidades.guardarEspecialidades(especialidad2);
-//        repoEspecialidades.guardarEspecialidades(especialidad3);
-//
-//
-//        // CLIENTE
-//        ClienteRepositorio repoCliente = new ClienteRepositorio();
-//
-//        Cliente cliente1 = new Cliente("Disco", "30-123456789-8");
-//        Cliente cliente2 = new Cliente("Farmacity", "30-987654321-5");
-//        Cliente cliente3 = new Cliente("Coto", "30-905621321-5");
-//
-//        repoCliente.guardarCliente(cliente1);
-//        repoCliente.guardarCliente(cliente2);
-//        repoCliente.guardarCliente(cliente3);
-//
-//        servicio1.agregarListaProblemas(tipoProblema1);
-//        servicio2.agregarListaProblemas(tipoProblema2);
-//        servicio3.agregarListaProblemas(tipoProblema3);
-//
-//        repoServicio.actualizarServicio(servicio1);
-//        repoServicio.actualizarServicio(servicio2);
-//        repoServicio.actualizarServicio(servicio3);
-//
-//        cliente1.agregarServiciosContratados(servicio1);
-//        cliente1.agregarServiciosContratados(servicio2);
-//        cliente3.agregarServiciosContratados(servicio3);
-//
-//        repoCliente.actualizarCliente(cliente1);
-//        repoCliente.actualizarCliente(cliente3);
-//
-//
-//        //ESTIMACION CANTIDAD DE HORAS ESTIMADAS POR EL TECNICO
-//        EstimacionRepositorio repoEstimacion = new EstimacionRepositorio();
-//
-//        Estimacion estimacion1 = new Estimacion(5, "Mantenimiento preventivo");
-//        Estimacion estimacion2 = new Estimacion(2, "Resolución de Incidentes Críticos");
-//        Estimacion estimacion3 = new Estimacion(4, "Soporte Técnico");
-//
-//        repoEstimacion.actualizarEstimacion(estimacion1);
-//        repoEstimacion.actualizarEstimacion(estimacion2);
-//        repoEstimacion.actualizarEstimacion(estimacion3);
-//
-//
-//        // TECNICOS
-//        TecnicoRepositorio repoTecnico = new TecnicoRepositorio();
-//
-//        Tecnico tecnico1 = new Tecnico("Gerardo", "Nuevo Incidente");
-//        Tecnico tecnico2 = new Tecnico("Rubén", "Nuevo Incidente");
-//        Tecnico tecnico3 = new Tecnico("Sergio", "Nuevo Incidente");
-//
-//        repoTecnico.guardarTecnico(tecnico1);
-//        repoTecnico.guardarTecnico(tecnico2);
-//        repoTecnico.guardarTecnico(tecnico3);
-//
-//        tecnico1.agregarEspecialidad(especialidad3);
-//        tecnico2.agregarEspecialidad(especialidad1);
-//        tecnico3.agregarEspecialidad(especialidad2);
-//
-//        repoTecnico.actualizarTecnico(tecnico1);
-//        repoTecnico.actualizarTecnico(tecnico2);
-//        repoTecnico.actualizarTecnico(tecnico3);
-//
-//        tecnico1.agregarHorasEstimadasResolucion(estimacion1);
-//        tecnico2.agregarHorasEstimadasResolucion(estimacion2);
-//        tecnico3.agregarHorasEstimadasResolucion(estimacion2);
-//
-//        repoTecnico.actualizarTecnico(tecnico1);
-//        repoTecnico.actualizarTecnico(tecnico2);
-//        repoTecnico.actualizarTecnico(tecnico3);
-//
-//
-//        // INCIDENTES
-//        IncidenteRepositorio repoIncidente = new IncidenteRepositorio();
-//
-//        Incidente incidente1 = new Incidente(cliente1,"Mantenimiento de SAP","error grave","Resolución de Incidentes Críticos",tecnico1,"10-01-2023",true);
-//        Incidente incidente2 = new Incidente(cliente2,"Soporte para Aplicaciones Tango","error grave","Mantenimiento preventivo",tecnico2,"10-04-2023",true);
-//        Incidente incidente3 = new Incidente(cliente3,"Asistencia en Sistemas Operativos Windows","error grave","Soporte Técnico",tecnico3,"18-01-2023",true);
-//
-//        repoIncidente.guardarIncidente(incidente1);
-//        repoIncidente.guardarIncidente(incidente2);
-//        repoIncidente.guardarIncidente(incidente3);
-//
-//        Incidente.agregarIncidente(incidente1);
-//        Incidente.agregarIncidente(incidente2);
-//        Incidente.agregarIncidente(incidente3);
-//
-//        repoIncidente.actualizarIncidente(incidente1);
-//        repoIncidente.actualizarIncidente(incidente2);
-//        repoIncidente.actualizarIncidente(incidente3);
 
+
+/*  <- si usas signo asi se comenta to-do lo que esta en el medio
+         TIPOS DE PROBLEMA
+        ProblemaRepositorio repoTipoProblema = new ProblemaRepositorio();
+
+        Problema tipoProblema1 = new Problema("Resolución de Incidentes Críticos", 5);
+        Problema tipoProblema2 = new Problema("Mantenimiento preventivo", 3);
+        Problema tipoProblema3 = new Problema("Soporte Técnico", 4);
+
+        repoTipoProblema.guardarProblema(tipoProblema1);
+        repoTipoProblema.guardarProblema(tipoProblema2);
+        repoTipoProblema.guardarProblema(tipoProblema3);
+
+
+        // SERVICIOS
+        ServicioRepositorio repoServicio = new ServicioRepositorio();
+
+        Servicio servicio1 = new Servicio("Mantenimiento de SAP");
+        Servicio servicio2 = new Servicio("Soporte para Aplicaciones Tango");
+        Servicio servicio3 = new Servicio("Asistencia en Sistemas Operativos Windows");
+
+        repoServicio.guardarServicio(servicio1);
+        repoServicio.guardarServicio(servicio2);
+        repoServicio.guardarServicio(servicio3);
+
+
+        // ESPECIALIDADES
+        EspecialidadesRepositorio repoEspecialidades = new EspecialidadesRepositorio();
+
+        Especialidad especialidad1 = new Especialidad("Especialista en SAP","Profesional con amplia experiencia");
+        Especialidad especialidad2 = new Especialidad("Técnico en Tango","Especializado en configuración de aplicaciones Tango");
+        Especialidad especialidad3 = new Especialidad("Experto en Windows","Experiencia en Sistemas Operativos Windows");
+
+        repoEspecialidades.guardarEspecialidades(especialidad1);
+        repoEspecialidades.guardarEspecialidades(especialidad2);
+        repoEspecialidades.guardarEspecialidades(especialidad3);
+
+
+        // CLIENTE
+        ClienteRepositorio repoCliente = new ClienteRepositorio();
+
+        Cliente cliente1 = new Cliente("Disco", "30-123456789-8");
+        Cliente cliente2 = new Cliente("Farmacity", "30-987654321-5");
+        Cliente cliente3 = new Cliente("Coto", "30-905621321-5");
+
+        repoCliente.guardarCliente(cliente1);
+        repoCliente.guardarCliente(cliente2);
+        repoCliente.guardarCliente(cliente3);
+
+        servicio1.agregarListaProblemas(tipoProblema1);
+        servicio2.agregarListaProblemas(tipoProblema2);
+        servicio3.agregarListaProblemas(tipoProblema3);
+
+        repoServicio.actualizarServicio(servicio1);
+        repoServicio.actualizarServicio(servicio2);
+        repoServicio.actualizarServicio(servicio3);
+
+        cliente1.agregarServiciosContratados(servicio1);
+        cliente1.agregarServiciosContratados(servicio2);
+        cliente3.agregarServiciosContratados(servicio3);
+
+        repoCliente.actualizarCliente(cliente1);
+        repoCliente.actualizarCliente(cliente3);
+
+
+        //ESTIMACION CANTIDAD DE HORAS ESTIMADAS POR EL TECNICO
+        EstimacionRepositorio repoEstimacion = new EstimacionRepositorio();
+
+        Estimacion estimacion1 = new Estimacion(5, "Mantenimiento preventivo");
+        Estimacion estimacion2 = new Estimacion(2, "Resolución de Incidentes Críticos");
+        Estimacion estimacion3 = new Estimacion(4, "Soporte Técnico");
+
+        repoEstimacion.actualizarEstimacion(estimacion1);
+        repoEstimacion.actualizarEstimacion(estimacion2);
+        repoEstimacion.actualizarEstimacion(estimacion3);
+
+
+        // TECNICOS
+        TecnicoRepositorio repoTecnico = new TecnicoRepositorio();
+
+        Tecnico tecnico1 = new Tecnico("Gerardo", "Nuevo Incidente");
+        Tecnico tecnico2 = new Tecnico("Rubén", "Nuevo Incidente");
+        Tecnico tecnico3 = new Tecnico("Sergio", "Nuevo Incidente");
+
+        repoTecnico.guardarTecnico(tecnico1);
+        repoTecnico.guardarTecnico(tecnico2);
+        repoTecnico.guardarTecnico(tecnico3);
+
+        tecnico1.agregarEspecialidad(especialidad3);
+        tecnico2.agregarEspecialidad(especialidad1);
+        tecnico3.agregarEspecialidad(especialidad2);
+
+        repoTecnico.actualizarTecnico(tecnico1);
+        repoTecnico.actualizarTecnico(tecnico2);
+        repoTecnico.actualizarTecnico(tecnico3);
+
+        tecnico1.agregarHorasEstimadasResolucion(estimacion1);
+        tecnico2.agregarHorasEstimadasResolucion(estimacion2);
+        tecnico3.agregarHorasEstimadasResolucion(estimacion2);
+
+        repoTecnico.actualizarTecnico(tecnico1);
+        repoTecnico.actualizarTecnico(tecnico2);
+        repoTecnico.actualizarTecnico(tecnico3);
+
+
+        // INCIDENTES
+        IncidenteRepositorio repoIncidente = new IncidenteRepositorio();
+
+        Incidente incidente1 = new Incidente(cliente1,"Mantenimiento de SAP","error grave","Resolución de Incidentes Críticos",tecnico1,"10-01-2023",true);
+        Incidente incidente2 = new Incidente(cliente2,"Soporte para Aplicaciones Tango","error grave","Mantenimiento preventivo",tecnico2,"10-04-2023",true);
+        Incidente incidente3 = new Incidente(cliente3,"Asistencia en Sistemas Operativos Windows","error grave","Soporte Técnico",tecnico3,"18-01-2023",true);
+
+        repoIncidente.guardarIncidente(incidente1);
+        repoIncidente.guardarIncidente(incidente2);
+        repoIncidente.guardarIncidente(incidente3);
+
+        Incidente.agregarIncidente(incidente1);
+        Incidente.agregarIncidente(incidente2);
+        Incidente.agregarIncidente(incidente3);
+
+        repoIncidente.actualizarIncidente(incidente1);
+        repoIncidente.actualizarIncidente(incidente2);
+        repoIncidente.actualizarIncidente(incidente3);
+FIN COMENTARIO */
     }
+
+// funciones auxiliares
+private int sum(int[] l, int n){ // dada una lista y un indice, suma todos los elementos hasta el indice,
+    int res = 0;
+    for(int i=0; i<n;i++){
+        res = res + l[i];
+    }
+    return res;
 }
+
+
+}
+

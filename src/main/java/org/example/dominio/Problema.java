@@ -11,9 +11,6 @@ public class Problema implements Serializable {
     private String nombreTipoProblema;
     private Integer horasEstimadasResolucion;
 
-    public Problema() {
-    }
-
     public Problema(String nombreTipoProblema, Integer horasEstimadasResolucion) {
         this.nombreTipoProblema = nombreTipoProblema;
         this.horasEstimadasResolucion = horasEstimadasResolucion;

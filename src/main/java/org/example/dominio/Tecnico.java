@@ -5,23 +5,24 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-public class Tecnico implements Serializable {
+public class Tecnico extends Miembro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTecnico;
     private String nombre;
-    private String notificacion;
+    public metodoContacto PrefNotificacion;
     @ManyToMany
     private List<Especialidad> especialidades = new ArrayList<>();
     @ManyToMany
 //    @JoinColumn(name = "id", referencedColumnName = "idEstimacion")
     private List<Estimacion> cantHorasEstimadas = new ArrayList<>();
 
-    public Tecnico() {
-    }
-    public Tecnico(String nombre, String notificacion) {
+    public int[] IncidentesResueltos;
+    public Tecnico(String nombre, metodoContacto notificacion) {
         this.nombre = nombre;
-        this.notificacion = notificacion;
+        this.PrefNotificacion = notificacion;
+        this.IncidentesResueltos = new int[7];
+
     }
     public Tecnico(String gerardo, String notificación, Especialidad especialidad1, Estimacion estimacion1) {
     }
@@ -50,14 +51,6 @@ public class Tecnico implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getNotificacion() {
-        return notificacion;
-    }
-
-    public void setNotificacion(String notificacion) {
-        this.notificacion = notificacion;
-    }
-
     public List<Estimacion> getCantHorasEstimadas() {
         return cantHorasEstimadas;
     }
@@ -78,12 +71,12 @@ public class Tecnico implements Serializable {
 
     @Override
     public String toString() {
-        return "Tecnico {" +
-                "idTecnico = " + idTecnico +
-                ", nombre = '" + nombre + '\'' +
-                ", notificacion = '" + notificacion + '\'' +
-                ", especialidades = " + especialidades +
-                ", cantHorasEstimadas = " + cantHorasEstimadas +
+        return "Tecnico{" +
+                "idTecnico=" + idTecnico +
+                ", nombre='" + nombre + '\'' +
+                ", especialidades=" + especialidades +
+                ", IncidentesResueltos=" + Arrays.toString(IncidentesResueltos) +
+                ", metodoContacto=" + metodoContacto +
                 '}';
     }
 }
