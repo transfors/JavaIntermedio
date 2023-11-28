@@ -26,7 +26,7 @@ public class Incidente implements Serializable {
         this.problemas = problemas;
         this.servicioReportado = servicioReportado;
         this.tecnicoAsignado = tecnicoAsignado;
-        this.estadoIncidente = estadoIncidente;
+        this.estadoIncidente = EstadoIncidente.Abierto;
         this.fechaCreacion = fechaCreacion;
         this.fechaResolucion = fechaResolucion;
     }
@@ -75,8 +75,12 @@ public class Incidente implements Serializable {
         return estadoIncidente;
     }
 
-    public void setEstadoIncidente(EstadoIncidente estadoIncidente) {
-        this.estadoIncidente = estadoIncidente;
+    public void tomarIncidente() {
+        this.estadoIncidente = EstadoIncidente.En_Proceso;
+    }
+
+    public void cerrarIncidente() {
+        this.estadoIncidente = EstadoIncidente.Resuelto;
     }
 
     public String getFechaCreacion() {

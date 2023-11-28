@@ -16,18 +16,67 @@ import java.util.List;
 //        TOMAS TORANZOS
 
 public class Main {
-    public Tecnico MasIncidentesResueltos(Tecnico[] l, int n){ // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
-        Tecnico res = l[0];
-        for (int i=1;i<=l.length;i++) {
-            if (sum(res.IncidentesResueltos,n) == sum (l[i].IncidentesResueltos,n)){
-                res = l[i];
+    public Tecnico MasIncidentesResueltos(Tecnico[] l, Incidente[] Inc, int n) { // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
+        Tupla[] ranking = new Tupla[l.length];
+        for (int i = 0; i < l.length; i++) {
+            ranking[i].clave = l[i];
+        }
+        for (int i = 0; i < Inc.length; i++) {
+            if (Inc[i].getEstadoIncidente() == EstadoIncidente.Resuelto) {
+                boolean done = false;
+                for (int j = 0; j < l.length && !done; j++) {
+                    if (Inc[i].getTecnicoAsignado() == ranking[j].clave) {
+                        ranking[j].valor++;
+                        done = true;
+                    }
+                }
             }
         }
-        return res;
+        for (int i = 0; i < ranking.length - 1; i++) {
+            int index = i;
+            for (int j = i + 1; j < ranking.length; j++) {
+                if (ranking[j].valor > ranking[index].valor) {
+                    index = j;//searching for lowest index
+                }
+            }
+            Tupla smallerNumber = ranking[index];
+            ranking[index] = ranking[i];
+            ranking[i] = smallerNumber;
+        }
+        return ranking[0].clave;
     }
-    public Tecnico MasIncidentesResueltosEspecialidad(Tecnico[] l, int n){ // temporal
+
+
+
+    public Tecnico MasIncidentesResueltosEspecialidad(Tecnico[] l, Incidente[] Inc, int n, Problema problema) { // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
+        Tupla[] ranking = new Tupla[l.length];
         Tecnico res = l[0];
-        return res;
+        for (int i = 0; i < l.length; i++) {
+            ranking[i].clave = l[i];
+        }
+        for (int i = 0; i < Inc.length; i++) {
+            if (Inc[i].getEstadoIncidente() == EstadoIncidente.Resuelto && Inc[i].getProblemas().contains(problema)) {
+                boolean done = false;
+                for (int j = 0; j < l.length && !done; j++) {
+                    if (Inc[i].getTecnicoAsignado() == ranking[j].clave) {
+                        ranking[j].valor++;
+                        done = true;
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < ranking.length - 1; i++) {
+            int index = i;
+            for (int j = i + 1; j < ranking.length; j++) {
+                if (ranking[j].valor > ranking[index].valor) {
+                    index = j;//searching for lowest index
+                }
+            }
+            Tupla smallerNumber = ranking[index];
+            ranking[index] = ranking[i];
+            ranking[i] = smallerNumber;
+        }
+        return ranking[0].clave;
     }
 
     public static void main(String[] args) {
