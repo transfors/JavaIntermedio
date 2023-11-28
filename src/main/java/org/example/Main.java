@@ -63,7 +63,7 @@ public class Main {
         EstimacionRepositorio repoEstimaciones = new EstimacionRepositorio();
         repoEstimaciones.getEstimacion().forEach(System.out::println);
 
-        Estimacion estimacionTipoProblema1 = repoEstimaciones.getEstimacionTipoProblema()
+        Estimacion estimacionTipoProblema1 = repoEstimaciones.getEstimacionTipoProblema();
 
         Estimacion estimacionCantHsEst1 = repoEstimaciones.getCantHsEst(8);
         System.out.println(estimacionCantHsEst1);

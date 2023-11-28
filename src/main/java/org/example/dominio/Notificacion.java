@@ -9,4 +9,11 @@ public class Notificacion{
 
    public boolean enviado;
 
+   public Notificacion(String Titulo, String Cuerpo, Incidente Incidente){
+      this.Titulo = Titulo;
+      this.Cuerpo = Cuerpo;
+      this.Incidente = Incidente;
+      this.enviado = false;
+   }
+
 }
