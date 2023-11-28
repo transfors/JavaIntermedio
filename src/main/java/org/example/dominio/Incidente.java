@@ -18,17 +18,24 @@ public class Incidente implements Serializable {
     private String fechaPosibleResolucion;
     private boolean incidenteIngresado = true;
 
-    public Incidente() {
+    public estado EstadoIncidente;
+
+    enum estado{
+        Abierto,
+        En_Proceso,
+        Resuelto,
+
     }
 
-    public Incidente(Cliente cliente, String servicio, String descripcion, String tipoProblema, Tecnico tecnicoAsignado, String fechaPosibleResolucion, boolean incidenteIngresado) {
+
+    public Incidente(Cliente cliente, String servicio, String descripcion, String tipoProblema, Tecnico tecnicoAsignado, String fechaPosibleResolucion) {
         this.cliente = cliente;
         this.servicio = servicio;
         this.descripcion = descripcion;
         this.tipoProblema = tipoProblema;
         this.tecnicoAsignado = tecnicoAsignado;
         this.fechaPosibleResolucion = fechaPosibleResolucion;
-        this.incidenteIngresado = incidenteIngresado;
+        EstadoIncidente = estado.Abierto;
     }
 
     public static void agregarIncidente(Incidente incidente1) {
@@ -38,7 +45,7 @@ public class Incidente implements Serializable {
         return idIncidente;
     }
 
-    public void setIdIncidente(Long idIncidente) {
+    public void setIdIncidente(long idIncidente) {
         this.idIncidente = idIncidente;
     }
 
@@ -96,6 +103,13 @@ public class Incidente implements Serializable {
 
     public void setIncidenteIngresado(boolean incidenteIngresado) {
         this.incidenteIngresado = incidenteIngresado;
+    }
+
+    public void tomarIncidente(){
+        EstadoIncidente = estado.En_Proceso;
+    }
+    public void cerrarIncidente(){
+        EstadoIncidente = estado.Resuelto;
     }
 
     @Override

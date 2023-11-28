@@ -6,22 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Cliente implements Serializable {
+public class Cliente extends Miembro implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCliente;
     private String razonSocial;
     private String cuit;
-    private String mail;
+    private String DirContacto;
     @ManyToMany
     private List<Servicio> servicioContratados = new ArrayList<>();
 
-    public Cliente() {
-    }
 
-    public Cliente(String razonSocial, String cuit) {
+    public Cliente(String razonSocial, String cuit, String DirContacto, metodoContacto PrefContacto ) {
         this.razonSocial = razonSocial;
         this.cuit = cuit;
+        this.DirContacto = DirContacto;
+        this.metodoContacto = PrefContacto;
     }
 
     public Long getIdCliente() {
@@ -48,12 +48,12 @@ public class Cliente implements Serializable {
         this.cuit = cuit;
     }
 
-    public String getMail() {
-        return mail;
+    public String getDirContacto() {
+        return DirContacto;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setDirContacto(String mail) {
+        this.DirContacto = mail;
     }
 
     public List<Servicio> getServiciosContratados() {
@@ -83,7 +83,7 @@ public class Cliente implements Serializable {
                 "idCliente = " + idCliente +
                 ", razonSocial = '" + razonSocial + '\'' +
                 ", cuit = '" + cuit + '\'' +
-                ", mail = '" + mail + '\'' +
+                ", dirContacto = '" + DirContacto + '\'' +
                 ", servicioContratados = " + servicioContratados +
                 '}';
     }

@@ -41,7 +41,8 @@ public class Main {
         EspecialidadesRepositorio repoEspecialidades = new EspecialidadesRepositorio();
         repoEspecialidades.getEspecialidades().forEach(System.out::println);
 
-        Especialidad e = repoEspecialidades.getNombreEspecialidad("Especialista en SAP");
+        EspecitEstimacionTipoProblema("Resolución de Incidentes Críticos");
+        System.out.println(estimacionTipoProblema1);alidad e = repoEspecialidades.getNombreEspecialidad("Especialista en SAP");
         System.out.println(e);
 
         ProblemaRepositorio repoHoras = new ProblemaRepositorio();
@@ -61,8 +62,7 @@ public class Main {
         EstimacionRepositorio repoEstimaciones = new EstimacionRepositorio();
         repoEstimaciones.getEstimacion().forEach(System.out::println);
 
-        Estimacion estimacionTipoProblema1 = repoEstimaciones.getEstimacionTipoProblema("Resolución de Incidentes Críticos");
-        System.out.println(estimacionTipoProblema1);
+        Estimacion estimacionTipoProblema1 = repoEstimaciones.getEstimacionTipoProblema()
 
         Estimacion estimacionCantHsEst1 = repoEstimaciones.getCantHsEst(8);
         System.out.println(estimacionCantHsEst1);

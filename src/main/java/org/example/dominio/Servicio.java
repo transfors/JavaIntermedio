@@ -15,9 +15,6 @@ public class Servicio implements Serializable {
 //    @JoinColumn(name = "idIncidente", referencedColumnName = "idProblema")
     private List<Problema> tipoProblema = new ArrayList<>();
 
-    public Servicio() {
-    }
-
     public Servicio(String nombreServicio) {
         this.idServicio = idServicio;
         this.nombreServicio = nombreServicio;

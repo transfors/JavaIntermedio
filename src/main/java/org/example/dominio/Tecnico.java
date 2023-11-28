@@ -17,8 +17,6 @@ public class Tecnico implements Serializable {
 //    @JoinColumn(name = "id", referencedColumnName = "idEstimacion")
     private List<Estimacion> cantHorasEstimadas = new ArrayList<>();
 
-    public Tecnico() {
-    }
     public Tecnico(String nombre, String notificacion) {
         this.nombre = nombre;
         this.notificacion = notificacion;
