@@ -42,7 +42,8 @@ public class Main {
         repoEspecialidades.getEspecialidades().forEach(System.out::println);
 
         EspecitEstimacionTipoProblema("Resolución de Incidentes Críticos");
-        System.out.println(estimacionTipoProblema1);alidad e = repoEspecialidades.getNombreEspecialidad("Especialista en SAP");
+        System.out.println(estimacionTipoProblema1);
+        Especialidad e = repoEspecialidades.getNombreEspecialidad("Especialista en SAP");
         System.out.println(e);
 
         ProblemaRepositorio repoHoras = new ProblemaRepositorio();
