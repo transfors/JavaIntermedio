@@ -2,29 +2,31 @@ package org.example.dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Tecnico extends Miembro implements Serializable {
+public class Tecnico implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTecnico;
     private String nombre;
-    public metodoContacto PrefNotificacion;
-    @ManyToMany
+    @OneToMany(mappedBy = "idEspecialidades")
     private List<Especialidad> especialidades = new ArrayList<>();
-    @ManyToMany
-//    @JoinColumn(name = "id", referencedColumnName = "idEstimacion")
-    private List<Estimacion> cantHorasEstimadas = new ArrayList<>();
+    private boolean disponible;
+    private String notificaciones;
+    @OneToMany
+    private List<Estimacion> estimaciones = new ArrayList<>();
 
-    public int[] IncidentesResueltos;
-    public Tecnico(String nombre, metodoContacto notificacion) {
-        this.nombre = nombre;
-        this.PrefNotificacion = notificacion;
-        this.IncidentesResueltos = new int[7];
-
+    public Tecnico() {
     }
-    public Tecnico(String gerardo, String notificación, Especialidad especialidad1, Estimacion estimacion1) {
+
+    public Tecnico(String nombre, List<Especialidad> especialidades, boolean disponible, String notificaciones, List<Estimacion> estimaciones) {
+        this.nombre = nombre;
+        this.especialidades = especialidades;
+        this.disponible = disponible;
+        this.notificaciones = notificaciones;
+        this.estimaciones = estimaciones;
     }
 
     public Long getIdTecnico() {
@@ -35,14 +37,6 @@ public class Tecnico extends Miembro implements Serializable {
         this.idTecnico = idTecnico;
     }
 
-    public List<Especialidad> getEspecialidades() {
-        return especialidades;
-    }
-
-    public void setEspecialidades(List<Especialidad> especialidades) {
-        this.especialidades = especialidades;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -51,32 +45,56 @@ public class Tecnico extends Miembro implements Serializable {
         this.nombre = nombre;
     }
 
-    public List<Estimacion> getCantHorasEstimadas() {
-        return cantHorasEstimadas;
+    public List<Especialidad> getEspecialidades() {
+        return especialidades;
     }
 
-    public void setCantHorasEstimadas(List<Estimacion> cantHorasEstimadas) {
-        this.cantHorasEstimadas = cantHorasEstimadas;
+    public void setEspecialidades(List<Especialidad> especialidades) {
+        this.especialidades = especialidades;
     }
 
-    // METODO PARA AGREGAR LAS ESPECIALIDADES
-    public void agregarEspecialidad(Especialidad especialidad) {
-        this.especialidades.add(especialidad);
+    public boolean isDisponible() {
+        return disponible;
     }
 
-    // METODO PARA AGREGAR CANTIDAD DE HORAS ESTIMADAS DE RESOLUCION
-    public void agregarHorasEstimadasResolucion(Estimacion estimacion) {
-        this.cantHorasEstimadas.add(estimacion);
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public String getNotificaciones() {
+        return notificaciones;
+    }
+
+    public void setNotificaciones(String notificaciones) {
+        this.notificaciones = notificaciones;
+    }
+
+    public List<Estimacion> getEstimaciones() {
+        return estimaciones;
+    }
+
+    public void setEstimaciones(List<Estimacion> estimaciones) {
+        this.estimaciones = estimaciones;
+    }
+
+    public void agregarEspecialidad(Especialidad especialidad3) {
+    }
+
+    public void agregarHorasEstimadasResolucion(Estimacion estimacion1) {
     }
 
     @Override
     public String toString() {
-        return "Tecnico{" +
-                "idTecnico=" + idTecnico +
-                ", nombre='" + nombre + '\'' +
-                ", especialidades=" + especialidades +
-                ", IncidentesResueltos=" + Arrays.toString(IncidentesResueltos) +
-                ", metodoContacto=" + metodoContacto +
+        return "Tecnico {" +
+                "idTecnico = " + idTecnico +
+                ", nombre = '" + nombre + '\'' +
+                ", especialidades = " + especialidades +
+                ", disponible = " + disponible +
+                ", notificaciones = '" + notificaciones + '\'' +
+                ", estimaciones = " + estimaciones +
                 '}';
     }
+
+
+
 }

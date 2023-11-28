@@ -1,9 +1,6 @@
 package org.example.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -12,9 +9,13 @@ public class Estimacion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstimacion;
     private Integer cantidadHorasEstimadas = 0;
-    private String tipoProblema;
+    @OneToOne
+    private TipoProblema tipoProblema;
 
-    public Estimacion(Integer cantidadHorasEstimadas, String tipoProblema) {
+    public Estimacion() {
+    }
+
+    public Estimacion(Integer cantidadHorasEstimadas, TipoProblema tipoProblema) {
         this.cantidadHorasEstimadas = cantidadHorasEstimadas;
         this.tipoProblema = tipoProblema;
     }
@@ -27,14 +28,6 @@ public class Estimacion implements Serializable {
         this.idEstimacion = idEstimacion;
     }
 
-    public String getTipoProblema() {
-        return tipoProblema;
-    }
-
-    public void setTipoProblema(String tipoProblema) {
-        this.tipoProblema = tipoProblema;
-    }
-
     public Integer getCantidadHorasEstimadas() {
         return cantidadHorasEstimadas;
     }
@@ -42,6 +35,19 @@ public class Estimacion implements Serializable {
     public void setCantidadHorasEstimadas(Integer cantidadHorasEstimadas) {
         this.cantidadHorasEstimadas = cantidadHorasEstimadas;
     }
+
+    public TipoProblema getTipoProblema() {
+        return tipoProblema;
+    }
+
+    public void setTipoProblema(TipoProblema tipoProblema) {
+        this.tipoProblema = tipoProblema;
+    }
+
+
+    public void agregarEstimacion(Estimacion estimacion1) {
+    }
+
 
     @Override
     public String toString() {
@@ -51,4 +57,5 @@ public class Estimacion implements Serializable {
                 ", tipoProblema = '" + tipoProblema + '\'' +
                 '}';
     }
+
 }

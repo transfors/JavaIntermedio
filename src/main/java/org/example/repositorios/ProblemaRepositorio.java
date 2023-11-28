@@ -31,12 +31,9 @@ public class ProblemaRepositorio {
         return session.createQuery("from Problema", Problema.class).list();
     }
 
-    public Problema getNombreTipoProblema(String nombreTipoProblema){
-        return session.createQuery("from Problema where nombreTipoProblema = :nombreTipoProblema", Problema.class).setParameter("nombreTipoProblema", nombreTipoProblema).list().get(0);
+    public Problema getProblema(String fechaEstResolucion){
+        return session.createQuery("from Problema where fechaEstResolucion = :fechaEstResolucion", Problema.class).setParameter("fechaEstResolucion", fechaEstResolucion).list().get(0);
     }
 
-    public Problema getHorasEstimadasResolucion(Integer horasEstimadasResolucion){
-        return session.createQuery("from Problema where horasEstimadasResolucion = :horasEstimadasResolucion", Problema.class).setParameter("horasEstimadasResolucion", horasEstimadasResolucion).list().get(0);
-    }
 
 }

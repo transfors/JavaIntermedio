@@ -9,14 +9,17 @@ public class Especialidad implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEspecialidades;
     private String nombreEspecialidad;
-    private String descripcion;
+    private String descripcionEspecialidad;
 
-    public Especialidad(String nombreEspecialidad, String descripcion) {
-        this.nombreEspecialidad = nombreEspecialidad;
-        this.descripcion = descripcion;
+    public Especialidad() {
     }
 
-   public Long getIdEspecialidades() {
+    public Especialidad(String nombreEspecialidad, String descripcionEspecialidad) {
+        this.nombreEspecialidad = nombreEspecialidad;
+        this.descripcionEspecialidad = descripcionEspecialidad;
+    }
+
+    public Long getIdEspecialidades() {
         return idEspecialidades;
     }
 
@@ -32,19 +35,25 @@ public class Especialidad implements Serializable {
         this.nombreEspecialidad = nombreEspecialidad;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionEspecialidad() {
+        return descripcionEspecialidad;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcionEspecialidad(String descripcionEspecialidad) {
+        this.descripcionEspecialidad = descripcionEspecialidad;
+    }
+
+    public void agregarEspecialidad(Especialidad especialidad1) {
     }
 
     @Override
     public String toString() {
-        return "Especialidades { " +
-                ", nombre = '" + nombreEspecialidad + '\'' +
-                ", descripcion = '" + descripcion + '\'' +
+        return "Especialidad {" +
+                "idEspecialidades = " + idEspecialidades +
+                ", nombreEspecialidad = '" + nombreEspecialidad + '\'' +
+                ", descripcionEspecialidad = '" + descripcionEspecialidad + '\'' +
                 '}';
     }
+
+
 }

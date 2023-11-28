@@ -31,19 +31,8 @@ public class EstimacionRepositorio {
         return session.createQuery("from Estimacion", Estimacion.class).list();
     }
 
-    public Estimacion getEstimacionTipoProblema(String tipoProblema){
-        return session.createQuery("from Estimacion where tipoProblema = :tipoProblema", Estimacion.class).setParameter("tipoProblema", tipoProblema).list().get(0);
-    }
-
-    public Estimacion getCantHsEst(Integer cantidadHorasEstimadas) {
-        List<Estimacion> estimaciones = session.createQuery("from Estimacion where cantidadHorasEstimadas = :cantidadHorasEstimadas", Estimacion.class)
-                .setParameter("cantidadHorasEstimadas", cantidadHorasEstimadas)
-                .list();
-        if (!estimaciones.isEmpty()) {
-            return estimaciones.get(0);
-        } else {
-            return null;
-        }
+    public Estimacion getEstimacionXCantHsEst(Integer cantHsEst){
+        return session.createQuery("from Estimacion where cantidadHorasEstimadas = :cantHsEst", Estimacion.class).setParameter("cantHsEst", cantHsEst).list().get(0);
     }
 
 

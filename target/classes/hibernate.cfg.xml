@@ -20,6 +20,7 @@
     <mapping class="org.example.dominio.Incidente"/>
     <mapping class="org.example.dominio.Servicio"/>
     <mapping class="org.example.dominio.Tecnico"/>
+    <mapping class="org.example.dominio.TipoProblema"/>
     <mapping class="org.example.dominio.Problema"/>
     <mapping class="org.example.dominio.Estimacion"/>
 
