@@ -11,10 +11,11 @@ public class Tecnico extends Miembro implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTecnico;
     private String nombre;
+    @ElementCollection
+    private List<Notificacion> notificaciones;
     @OneToMany(mappedBy = "idEspecialidades")
     private List<Especialidad> especialidades = new ArrayList<>();
     private boolean disponible;
-    private List<Notificacion> notificaciones;
 
     public int[] IncidentesResueltos;
     @OneToMany

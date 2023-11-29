@@ -1,13 +1,13 @@
 package org.example.dominio;
 
 public class Notificacion{
-   public String Titulo;
+   private String Titulo;
 
-   public String Cuerpo;
+   private String Cuerpo;
 
-   public Incidente Incidente;
+   private Incidente Incidente;
 
-   public boolean enviado;
+   private boolean enviado;
 
    public Notificacion(String Titulo, String Cuerpo, Incidente Incidente){
       this.Titulo = Titulo;
@@ -15,5 +15,12 @@ public class Notificacion{
       this.Incidente = Incidente;
       this.enviado = false;
    }
-
+   @Override
+   public String toString() {
+      return "Notificacion{" +
+              "Titulo='" + Titulo + '\'' +
+              ", Cuerpo='" + Cuerpo + '\'' +
+              ", Incidente=" + Incidente +
+              '}';
+   }
 }

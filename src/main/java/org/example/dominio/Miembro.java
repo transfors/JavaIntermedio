@@ -1,12 +1,11 @@
 package org.example.dominio;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 public class Miembro {
-
-    enum metodoContacto{
-        Whatsapp,
-        Email,
-    }
-    public metodoContacto metodoContacto;
+    private metodoContacto metodoContacto;
 
     public void notificar(Notificacion Notificacion) {
         if (metodoContacto == metodoContacto.Email) {
