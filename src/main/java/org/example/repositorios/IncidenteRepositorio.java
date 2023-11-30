@@ -28,7 +28,7 @@ public class IncidenteRepositorio {
         session.getTransaction().commit();
     }
 
-    public List<Incidente> getIncidentes() {
+    public static List<Incidente> getIncidentes() {
         return session.createQuery("from Incidente", Incidente.class).list();
     }
 

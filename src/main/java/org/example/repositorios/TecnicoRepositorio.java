@@ -28,7 +28,7 @@ public class TecnicoRepositorio {
         session.getTransaction().commit();
     }
 
-    public List<Tecnico> getTecnicos() {
+    public static List<Tecnico> getTecnicos() {
         return session.createQuery("from Tecnico ", Tecnico.class).list();
     }
 

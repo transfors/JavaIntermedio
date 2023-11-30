@@ -2,7 +2,7 @@ package org.example.dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -18,8 +18,8 @@ public class Incidente implements Serializable {
     @ManyToOne
     private Tecnico tecnicoAsignado;
     private EstadoIncidente estadoIncidente;
-    private String fechaCreacion;
-    private String fechaResolucion;
+    private Long fechaCreacion;
+    private Long fechaResolucion;
 
     public Incidente(String nombre, List<Problema> problemas, Servicio servicioReportado, Tecnico tecnicoAsignado, EstadoIncidente estadoIncidente, String fechaCreacion, String fechaResolucion) {
         this.nombre = nombre;
@@ -27,8 +27,7 @@ public class Incidente implements Serializable {
         this.servicioReportado = servicioReportado;
         this.tecnicoAsignado = tecnicoAsignado;
         this.estadoIncidente = EstadoIncidente.Abierto;
-        this.fechaCreacion = fechaCreacion;
-        this.fechaResolucion = fechaResolucion;
+        this.fechaCreacion = Instant.now().getEpochSecond();
     }
 
     public Long getIdIncidente() {
@@ -81,25 +80,41 @@ public class Incidente implements Serializable {
 
     public void cerrarIncidente() {
         this.estadoIncidente = EstadoIncidente.Resuelto;
+        this.fechaResolucion = Instant.now().getEpochSecond();
     }
 
-    public String getFechaCreacion() {
+    public Long getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Long fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public String getFechaResolucion() {
+    public Long getFechaResolucion() {
         return fechaResolucion;
     }
 
-    public void setFechaResolucion(String fechaResolucion) {
+    public void setFechaResolucion(Long fechaResolucion) {
         this.fechaResolucion = fechaResolucion;
     }
 
     public static void agregarIncidente(Incidente incidente1) {
+    }
+
+    public boolean ocurrioHaceNdias(int n){
+        Long fechaActual = Instant.now().getEpochSecond();
+        fechaActual = fechaActual - 86400*n;
+        return fechaResolucion >= fechaActual;
+    }
+
+    public boolean especialidadCapacitada(Especialidad e){
+        boolean res = true;
+        for(Problema p: problemas){
+             TipoProblema tProblema = p.getTipoProblema();
+             res = res && tProblema.getEspecialidades().contains(e); //
+        }
+        return res;
     }
 
 

@@ -6,6 +6,7 @@ import org.example.repositorios.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //        Integrantes Grupo 3:
 //        SANTIAGO MARTÍN TOLEDO AGUIRRE
@@ -16,75 +17,50 @@ import java.util.List;
 //        TOMAS TORANZOS
 
 public class Main {
-    public Tecnico MasIncidentesResueltos(Tecnico[] l, Incidente[] Inc, int n) { // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
-        Tupla[] ranking = new Tupla[l.length];
-        for (int i = 0; i < l.length; i++) {
-            ranking[i].clave = l[i];
-        }
-        for (int i = 0; i < Inc.length; i++) {
-            if (Inc[i].getEstadoIncidente() == EstadoIncidente.Resuelto) {
-                boolean done = false;
-                for (int j = 0; j < l.length && !done; j++) {
-                    if (Inc[i].getTecnicoAsignado() == ranking[j].clave) {
-                        ranking[j].valor++;
-                        done = true;
-                    }
-                }
+    RankingTecnicos lambdaMasIncidentesResueltos = n -> { // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
+        List<Tecnico> tecnicos = TecnicoRepositorio.getTecnicos();
+        List<Incidente> incidentes = IncidenteRepositorio.getIncidentes();
+        Tecnico tecnicoTop = tecnicos.get(0);
+        int topIncidentesResueltos = 0;
+        for(Tecnico t: tecnicos ){
+            List<Incidente> resueltosPorTecnico = incidentes.stream().filter(h -> h.ocurrioHaceNdias(n) && h.getTecnicoAsignado() == t ).collect(Collectors.toList());
+            if (resueltosPorTecnico.size() > topIncidentesResueltos) {
+                tecnicoTop = t;
+                topIncidentesResueltos = resueltosPorTecnico.size();
             }
         }
-        for (int i = 0; i < ranking.length - 1; i++) {
-            int index = i;
-            for (int j = i + 1; j < ranking.length; j++) {
-                if (ranking[j].valor > ranking[index].valor) {
-                    index = j;//searching for lowest index
-                }
-            }
-            Tupla smallerNumber = ranking[index];
-            ranking[index] = ranking[i];
-            ranking[i] = smallerNumber;
-        }
-        return ranking[0].clave;
-    }
-    public Tecnico MasIncidentesResueltosEspecialidad(Tecnico[] l, Incidente[] Inc, int n, Problema problema) { // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
-        Tupla[] ranking = new Tupla[l.length];
-        Tecnico res = l[0];
-        for (int i = 0; i < l.length; i++) {
-            ranking[i].clave = l[i];
-        }
-        for (int i = 0; i < Inc.length; i++) {
-            if (Inc[i].getEstadoIncidente() == EstadoIncidente.Resuelto && Inc[i].getProblemas().contains(problema)) {
-                boolean done = false;
-                for (int j = 0; j < l.length && !done; j++) {
-                    if (Inc[i].getTecnicoAsignado() == ranking[j].clave) {
-                        ranking[j].valor++;
-                        done = true;
-                    }
-                }
+        return tecnicoTop;
+    };
+    RankingTecnicosEspecialidad lambdaMasIncidentesResueltosEspecialidad = (n,e) -> { // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
+        List<Tecnico> tecnicos = TecnicoRepositorio.getTecnicos();
+        List<Incidente> incidentes = IncidenteRepositorio.getIncidentes();
+        Tecnico tecnicoTop = tecnicos.get(0);
+        int topIncidentesResueltos = 0;
+        for(Tecnico t: tecnicos ){
+            List<Incidente> resueltosPorTecnico = incidentes.stream().filter(h -> h.ocurrioHaceNdias(n) && h.getTecnicoAsignado() == t && h.especialidadCapacitada(e) ).collect(Collectors.toList());
+            if (resueltosPorTecnico.size() > topIncidentesResueltos) {
+                tecnicoTop = t;
+                topIncidentesResueltos = resueltosPorTecnico.size();
             }
         }
-        for (int i = 0; i < ranking.length - 1; i++) {
-            int index = i;
-            for (int j = i + 1; j < ranking.length; j++) {
-                if (ranking[j].valor > ranking[index].valor) {
-                    index = j;//searching for lowest index
-                }
-            }
-            Tupla smallerNumber = ranking[index];
-            ranking[index] = ranking[i];
-            ranking[i] = smallerNumber;
-        }
-        return ranking[0].clave;
-    }
+        return tecnicoTop;
+    };
 
-    public Tecnico tecnicoMasRapido(Tecnico[] l){
-        Tecnico res = l[0];
-        for(Tecnico tecnico : l) {
-            if (sumHoras(tecnico.getEstimaciones()) < sumHoras(res.getEstimaciones())) {
-                res  = tecnico;
+    RankingTecnicos lambdaTecnicoMasRapido = (n) -> {
+        List<Tecnico> tecnicos = TecnicoRepositorio.getTecnicos();
+        List<Incidente> incidentes = IncidenteRepositorio.getIncidentes();
+        Tecnico tecnicoTop = tecnicos.get(0);
+        float mejorPromedioTiempo = 0;
+        for (Tecnico t: tecnicos) {
+            List<Incidente> resueltosPorTecnico = incidentes.stream().filter(h -> h.ocurrioHaceNdias(n) && h.getTecnicoAsignado() == t).collect(Collectors.toList());
+            float promedioTiempo = resueltosPorTecnico.stream().mapToLong(incidente -> incidente.getFechaResolucion() - incidente.getFechaCreacion()).boxed().collect(Collectors.summingLong(Long::longValue));
+            if (promedioTiempo < mejorPromedioTiempo || mejorPromedioTiempo == 0){
+                tecnicoTop = t;
+                mejorPromedioTiempo = promedioTiempo;
             }
         }
-        return res;
-    }
+        return tecnicoTop;
+    };
 
     public static void main(String[] args) {
 
