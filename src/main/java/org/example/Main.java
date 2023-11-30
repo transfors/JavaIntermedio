@@ -17,9 +17,11 @@ import java.util.stream.Collectors;
 //        TOMAS TORANZOS
 
 public class Main {
+
+    TecnicoRepositorio repoTecnico = new TecnicoRepositorio(); IncidenteRepositorio repoIncidentes = new IncidenteRepositorio();
     RankingTecnicos lambdaMasIncidentesResueltos = n -> { // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
-        List<Tecnico> tecnicos = TecnicoRepositorio.getTecnicos();
-        List<Incidente> incidentes = IncidenteRepositorio.getIncidentes();
+        List<Tecnico> tecnicos = repoTecnico.getTecnicos();
+        List<Incidente> incidentes = repoIncidentes.getIncidentes();
         Tecnico tecnicoTop = tecnicos.get(0);
         int topIncidentesResueltos = 0;
         for(Tecnico t: tecnicos ){
@@ -32,8 +34,8 @@ public class Main {
         return tecnicoTop;
     };
     RankingTecnicosEspecialidad lambdaMasIncidentesResueltosEspecialidad = (n,e) -> { // dada una lista de tecnicos, busca el que tenga mas incidentes resueltos.
-        List<Tecnico> tecnicos = TecnicoRepositorio.getTecnicos();
-        List<Incidente> incidentes = IncidenteRepositorio.getIncidentes();
+        List<Tecnico> tecnicos = repoTecnico.getTecnicos();
+        List<Incidente> incidentes = repoIncidentes.getIncidentes();
         Tecnico tecnicoTop = tecnicos.get(0);
         int topIncidentesResueltos = 0;
         for(Tecnico t: tecnicos ){
@@ -47,8 +49,8 @@ public class Main {
     };
 
     RankingTecnicos lambdaTecnicoMasRapido = (n) -> {
-        List<Tecnico> tecnicos = TecnicoRepositorio.getTecnicos();
-        List<Incidente> incidentes = IncidenteRepositorio.getIncidentes();
+        List<Tecnico> tecnicos = repoTecnico.getTecnicos();
+        List<Incidente> incidentes = repoIncidentes.getIncidentes();
         Tecnico tecnicoTop = tecnicos.get(0);
         float mejorPromedioTiempo = 0;
         for (Tecnico t: tecnicos) {
@@ -277,19 +279,4 @@ public class Main {
 
     }
 
-    private int sum(int[] l, int n) { // dada una lista y un indice, suma todos los elementos hasta el indice,
-        int res = 0;
-        for (int i = 0; i < n; i++) {
-            res = res + l[i];
-        }
-        return res;
-    }
-
-    private int sumHoras(List<Estimacion> l){
-        int res = 0;
-        for (int i=0;i<l.size();i++){
-            res = res + l.get(i).getCantidadHorasEstimadas();
-        }
-        return res/l.size();
-    }
 }
